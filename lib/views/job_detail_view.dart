@@ -41,27 +41,42 @@ class JobDetailView extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(28),
             ),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(job.category.toUpperCase(),
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(fontWeight: FontWeight.w900)),
+                  style: Theme.of(context)
+                      .textTheme
+                      .labelMedium
+                      ?.copyWith(fontWeight: FontWeight.w900)),
               const SizedBox(height: 12),
               Text(job.title,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900)),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall
+                      ?.copyWith(fontWeight: FontWeight.w900)),
               const SizedBox(height: 8),
               Text(job.company, style: Theme.of(context).textTheme.titleMedium),
               const SizedBox(height: 18),
               Wrap(spacing: 18, runSpacing: 10, children: [
                 _Fact(Icons.public, job.location),
                 _Fact(Icons.schedule, job.jobType),
-                if (job.salary?.trim().isNotEmpty == true) _Fact(Icons.payments_outlined, job.salary!),
+                if (job.salary?.trim().isNotEmpty == true)
+                  _Fact(Icons.payments_outlined, job.salary!),
               ]),
             ]),
           ),
           const SizedBox(height: 26),
           Text('Sobre el puesto',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900)),
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.copyWith(fontWeight: FontWeight.w900)),
           const SizedBox(height: 12),
-          Text(description, style: Theme.of(context).textTheme.bodyLarge?.copyWith(height: 1.65)),
+          Text(description,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge
+                  ?.copyWith(height: 1.65)),
           const SizedBox(height: 28),
           Text('Esta vacante fue publicada por Remotive.',
               style: Theme.of(context).textTheme.bodySmall),
@@ -73,10 +88,13 @@ class JobDetailView extends StatelessWidget {
           style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(56)),
           onPressed: () async {
             final uri = Uri.tryParse(job.url);
-            if (uri == null || !await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+            if (uri == null ||
+                !await launchUrl(uri, mode: LaunchMode.externalApplication)) {
               if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('No fue posible abrir la oferta original.')),
+                  const SnackBar(
+                      content:
+                          Text('No fue posible abrir la oferta original.')),
                 );
               }
             }
@@ -94,7 +112,8 @@ class _Fact extends StatelessWidget {
   final IconData icon;
   final String text;
   @override
-  Widget build(BuildContext context) => Row(mainAxisSize: MainAxisSize.min, children: [
+  Widget build(BuildContext context) =>
+      Row(mainAxisSize: MainAxisSize.min, children: [
         Icon(icon, size: 17),
         const SizedBox(width: 6),
         ConstrainedBox(

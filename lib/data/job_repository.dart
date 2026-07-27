@@ -22,7 +22,8 @@ class RemotiveJobsRepository implements JobsRepository {
   Future<List<Job>> fetchJobs({bool forceRefresh = false}) async {
     final cached = _readCache();
     final date = DateTime.tryParse(_preferences.getString(_cacheDateKey) ?? '');
-    final isFresh = date != null && DateTime.now().difference(date) < cacheDuration;
+    final isFresh =
+        date != null && DateTime.now().difference(date) < cacheDuration;
     if (!forceRefresh && cached.isNotEmpty && isFresh) return cached;
 
     try {
@@ -37,7 +38,8 @@ class RemotiveJobsRepository implements JobsRepository {
         _cacheKey,
         jsonEncode(jobs.map((job) => job.toJson()).toList()),
       );
-      await _preferences.setString(_cacheDateKey, DateTime.now().toIso8601String());
+      await _preferences.setString(
+          _cacheDateKey, DateTime.now().toIso8601String());
       return jobs;
     } on DioException {
       if (cached.isNotEmpty) return cached;
@@ -75,6 +77,6 @@ class SavedJobsRepository {
     }
   }
 
-  Future<void> save(List<SavedJob> jobs) =>
-      _preferences.setString(_key, jsonEncode(jobs.map((job) => job.toJson()).toList()));
+  Future<void> save(List<SavedJob> jobs) => _preferences.setString(
+      _key, jsonEncode(jobs.map((job) => job.toJson()).toList()));
 }

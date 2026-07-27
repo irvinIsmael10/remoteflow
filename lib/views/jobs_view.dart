@@ -17,33 +17,44 @@ class JobsView extends StatelessWidget {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 18, 20, 12),
-              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text('Tu próximo trabajo,\nsin fronteras.',
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w900, height: 1.1)),
-                const SizedBox(height: 18),
-                TextField(
-                  onChanged: vm.search,
-                  decoration: InputDecoration(
-                    hintText: 'Puesto o empresa',
-                    prefixIcon: const Icon(Icons.search),
-                    suffixIcon: IconButton(
-                      tooltip: 'Filtros',
-                      onPressed: () => _showFilters(context, vm),
-                      icon: Badge(isLabelVisible: vm.hasFilters, child: const Icon(Icons.tune)),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Tu próximo trabajo,\nsin fronteras.',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w900, height: 1.1)),
+                    const SizedBox(height: 18),
+                    TextField(
+                      onChanged: vm.search,
+                      decoration: InputDecoration(
+                        hintText: 'Puesto o empresa',
+                        prefixIcon: const Icon(Icons.search),
+                        suffixIcon: IconButton(
+                          tooltip: 'Filtros',
+                          onPressed: () => _showFilters(context, vm),
+                          icon: Badge(
+                              isLabelVisible: vm.hasFilters,
+                              child: const Icon(Icons.tune)),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Row(children: [
-                  Text('${vm.jobs.length} oportunidades', style: const TextStyle(fontWeight: FontWeight.w700)),
-                  const Spacer(),
-                  Text('Fuente: Remotive', style: Theme.of(context).textTheme.labelMedium),
-                ]),
-              ]),
+                    const SizedBox(height: 12),
+                    Row(children: [
+                      Text('${vm.jobs.length} oportunidades',
+                          style: const TextStyle(fontWeight: FontWeight.w700)),
+                      const Spacer(),
+                      Text('Fuente: Remotive',
+                          style: Theme.of(context).textTheme.labelMedium),
+                    ]),
+                  ]),
             ),
           ),
           if (vm.state == LoadState.loading)
-            const SliverFillRemaining(child: Center(child: CircularProgressIndicator()))
+            const SliverFillRemaining(
+                child: Center(child: CircularProgressIndicator()))
           else if (vm.state == LoadState.error)
             SliverFillRemaining(
               child: _Message(
@@ -72,7 +83,8 @@ class JobsView extends StatelessWidget {
                     job: job,
                     onTap: () => Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => JobDetailView(job: job)),
+                      MaterialPageRoute(
+                          builder: (_) => JobDetailView(job: job)),
                     ),
                   );
                 },
@@ -91,40 +103,59 @@ class JobsView extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       builder: (context) => StatefulBuilder(builder: (context, setModalState) {
-        Widget dropdown(String label, String? value, List<String> values, ValueChanged<String?> onChanged) =>
+        Widget dropdown(String label, String? value, List<String> values,
+                ValueChanged<String?> onChanged) =>
             DropdownButtonFormField<String>(
               initialValue: value,
               decoration: InputDecoration(labelText: label),
-              items: values.map((item) => DropdownMenuItem(value: item, child: Text(item, overflow: TextOverflow.ellipsis))).toList(),
+              items: values
+                  .map((item) => DropdownMenuItem(
+                      value: item,
+                      child: Text(item, overflow: TextOverflow.ellipsis)))
+                  .toList(),
               onChanged: onChanged,
             );
         return SafeArea(
           child: Padding(
-            padding: EdgeInsets.fromLTRB(20, 20, 20, 20 + MediaQuery.viewInsetsOf(context).bottom),
-            child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-              Text('Filtrar vacantes', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800)),
-              const SizedBox(height: 18),
-              dropdown('Categoría', category, vm.categories, (v) => setModalState(() => category = v)),
-              const SizedBox(height: 12),
-              dropdown('Ubicación', location, vm.locations, (v) => setModalState(() => location = v)),
-              const SizedBox(height: 12),
-              dropdown('Tipo de empleo', jobType, vm.jobTypes, (v) => setModalState(() => jobType = v)),
-              const SizedBox(height: 18),
-              FilledButton(
-                onPressed: () {
-                  vm.setFilters(newCategory: category, newLocation: location, newJobType: jobType);
-                  Navigator.pop(context);
-                },
-                child: const Text('Aplicar filtros'),
-              ),
-              TextButton(
-                onPressed: () {
-                  vm.setFilters(clear: true);
-                  Navigator.pop(context);
-                },
-                child: const Text('Limpiar'),
-              ),
-            ]),
+            padding: EdgeInsets.fromLTRB(
+                20, 20, 20, 20 + MediaQuery.viewInsetsOf(context).bottom),
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text('Filtrar vacantes',
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(fontWeight: FontWeight.w800)),
+                  const SizedBox(height: 18),
+                  dropdown('Categoría', category, vm.categories,
+                      (v) => setModalState(() => category = v)),
+                  const SizedBox(height: 12),
+                  dropdown('Ubicación', location, vm.locations,
+                      (v) => setModalState(() => location = v)),
+                  const SizedBox(height: 12),
+                  dropdown('Tipo de empleo', jobType, vm.jobTypes,
+                      (v) => setModalState(() => jobType = v)),
+                  const SizedBox(height: 18),
+                  FilledButton(
+                    onPressed: () {
+                      vm.setFilters(
+                          newCategory: category,
+                          newLocation: location,
+                          newJobType: jobType);
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Aplicar filtros'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      vm.setFilters(clear: true);
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Limpiar'),
+                  ),
+                ]),
           ),
         );
       }),
@@ -133,7 +164,11 @@ class JobsView extends StatelessWidget {
 }
 
 class _Message extends StatelessWidget {
-  const _Message({required this.icon, required this.title, required this.subtitle, this.action});
+  const _Message(
+      {required this.icon,
+      required this.title,
+      required this.subtitle,
+      this.action});
   final IconData icon;
   final String title;
   final String subtitle;
@@ -145,10 +180,17 @@ class _Message extends StatelessWidget {
           child: Column(mainAxisSize: MainAxisSize.min, children: [
             Icon(icon, size: 56, color: Theme.of(context).colorScheme.primary),
             const SizedBox(height: 14),
-            Text(title, style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800)),
+            Text(title,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontWeight: FontWeight.w800)),
             const SizedBox(height: 6),
             Text(subtitle, textAlign: TextAlign.center),
-            if (action != null) ...[const SizedBox(height: 16), FilledButton(onPressed: action, child: const Text('Reintentar'))],
+            if (action != null) ...[
+              const SizedBox(height: 16),
+              FilledButton(onPressed: action, child: const Text('Reintentar'))
+            ],
           ]),
         ),
       );

@@ -6,7 +6,8 @@ import '../models/job.dart';
 import '../viewmodels/saved_jobs_view_model.dart';
 
 class JobCard extends StatelessWidget {
-  const JobCard({super.key, required this.job, required this.onTap, this.status});
+  const JobCard(
+      {super.key, required this.job, required this.onTap, this.status});
   final Job job;
   final VoidCallback onTap;
   final ApplicationStatus? status;
@@ -30,10 +31,17 @@ class JobCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(job.title, maxLines: 2, overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800)),
+                    Text(job.title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(fontWeight: FontWeight.w800)),
                     const SizedBox(height: 4),
-                    Text(job.company, style: TextStyle(color: Theme.of(context).colorScheme.primary)),
+                    Text(job.company,
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary)),
                     const SizedBox(height: 10),
                     Wrap(
                       spacing: 7,
@@ -41,7 +49,8 @@ class JobCard extends StatelessWidget {
                       children: [
                         _Tag(Icons.public, job.location),
                         _Tag(Icons.schedule, job.jobType),
-                        if (status != null) _Tag(Icons.flag_outlined, status!.label),
+                        if (status != null)
+                          _Tag(Icons.flag_outlined, status!.label),
                       ],
                     ),
                     const SizedBox(height: 10),
@@ -94,7 +103,10 @@ class _Initial extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
         child: Text(company.characters.first.toUpperCase(),
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900)),
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(fontWeight: FontWeight.w900)),
       );
 }
 
@@ -114,7 +126,9 @@ class _Tag extends StatelessWidget {
           const SizedBox(width: 4),
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 130),
-            child: Text(text, maxLines: 1, overflow: TextOverflow.ellipsis,
+            child: Text(text,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.labelSmall),
           ),
         ]),

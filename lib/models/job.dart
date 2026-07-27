@@ -46,7 +46,9 @@ class Job {
         category: json['category'] as String? ?? 'Otros',
         jobType: json['job_type'] as String? ?? 'No especificado',
         location: json['candidate_required_location'] as String? ?? 'Remoto',
-        publicationDate: DateTime.tryParse(json['publication_date'] as String? ?? '') ?? DateTime.now(),
+        publicationDate:
+            DateTime.tryParse(json['publication_date'] as String? ?? '') ??
+                DateTime.now(),
         companyLogo: json['company_logo'] as String?,
         salary: json['salary'] as String?,
       );
@@ -93,7 +95,8 @@ class SavedJob {
           orElse: () => ApplicationStatus.saved,
         ),
         notes: json['notes'] as String? ?? '',
-        savedAt: DateTime.tryParse(json['savedAt'] as String? ?? '') ?? DateTime.now(),
+        savedAt: DateTime.tryParse(json['savedAt'] as String? ?? '') ??
+            DateTime.now(),
       );
 
   Map<String, dynamic> toJson() => {

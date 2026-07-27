@@ -63,7 +63,12 @@ void main() {
     test('combines category, location and type filters', () async {
       final vm = JobsViewModel(FakeJobsRepository([
         job(id: 1, title: 'Dev', company: 'A'),
-        job(id: 2, title: 'Dev', company: 'B', location: 'Mexico', type: 'contract'),
+        job(
+            id: 2,
+            title: 'Dev',
+            company: 'B',
+            location: 'Mexico',
+            type: 'contract'),
       ]));
       await vm.load();
 

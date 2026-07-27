@@ -30,10 +30,13 @@ class _RemoteFlowAppState extends State<RemoteFlowApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => JobsViewModel(RemotiveJobsRepository(Dio(), widget.preferences))..load(),
+          create: (_) =>
+              JobsViewModel(RemotiveJobsRepository(Dio(), widget.preferences))
+                ..load(),
         ),
         ChangeNotifierProvider(
-          create: (_) => SavedJobsViewModel(SavedJobsRepository(widget.preferences)),
+          create: (_) =>
+              SavedJobsViewModel(SavedJobsRepository(widget.preferences)),
         ),
       ],
       child: MaterialApp(

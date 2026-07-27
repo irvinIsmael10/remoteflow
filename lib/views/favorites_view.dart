@@ -14,13 +14,18 @@ class FavoritesView extends StatelessWidget {
       return const _Empty(
         icon: Icons.bookmark_add_outlined,
         title: 'Guarda lo que te inspira',
-        subtitle: 'Tus vacantes favoritas aparecerán aquí y seguirán disponibles cuando vuelvas.',
+        subtitle:
+            'Tus vacantes favoritas aparecerán aquí y seguirán disponibles cuando vuelvas.',
       );
     }
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 18, 20, 24),
       children: [
-        Text('Favoritos', style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w900)),
+        Text('Favoritos',
+            style: Theme.of(context)
+                .textTheme
+                .headlineMedium
+                ?.copyWith(fontWeight: FontWeight.w900)),
         const SizedBox(height: 6),
         Text('${items.length} vacantes guardadas'),
         const SizedBox(height: 18),
@@ -39,7 +44,8 @@ class FavoritesView extends StatelessWidget {
 }
 
 class _Empty extends StatelessWidget {
-  const _Empty({required this.icon, required this.title, required this.subtitle});
+  const _Empty(
+      {required this.icon, required this.title, required this.subtitle});
   final IconData icon;
   final String title;
   final String subtitle;
@@ -50,8 +56,12 @@ class _Empty extends StatelessWidget {
           child: Column(mainAxisSize: MainAxisSize.min, children: [
             Icon(icon, size: 64, color: Theme.of(context).colorScheme.primary),
             const SizedBox(height: 16),
-            Text(title, textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w900)),
+            Text(title,
+                textAlign: TextAlign.center,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontWeight: FontWeight.w900)),
             const SizedBox(height: 8),
             Text(subtitle, textAlign: TextAlign.center),
           ]),

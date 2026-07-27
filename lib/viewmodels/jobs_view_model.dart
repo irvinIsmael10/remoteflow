@@ -24,13 +24,16 @@ class JobsViewModel extends ChangeNotifier {
         return matchesTerm &&
             (category == null || job.category == category) &&
             (jobType == null || job.jobType == jobType) &&
-            (location == null || job.location.toLowerCase().contains(location!.toLowerCase()));
+            (location == null ||
+                job.location.toLowerCase().contains(location!.toLowerCase()));
       }).toList();
 
   List<String> get categories => _unique(_jobs.map((job) => job.category));
   List<String> get jobTypes => _unique(_jobs.map((job) => job.jobType));
-  List<String> get locations => _unique(_jobs.map((job) => job.location).take(30));
-  bool get hasFilters => category != null || location != null || jobType != null;
+  List<String> get locations =>
+      _unique(_jobs.map((job) => job.location).take(30));
+  bool get hasFilters =>
+      category != null || location != null || jobType != null;
 
   Future<void> load({bool refresh = false}) async {
     state = LoadState.loading;
@@ -41,7 +44,8 @@ class JobsViewModel extends ChangeNotifier {
       state = LoadState.loaded;
     } catch (_) {
       state = LoadState.error;
-      errorMessage = 'No pudimos cargar las vacantes. Revisa tu conexión e intenta de nuevo.';
+      errorMessage =
+          'No pudimos cargar las vacantes. Revisa tu conexión e intenta de nuevo.';
     }
     notifyListeners();
   }
@@ -51,7 +55,11 @@ class JobsViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setFilters({String? newCategory, String? newLocation, String? newJobType, bool clear = false}) {
+  void setFilters(
+      {String? newCategory,
+      String? newLocation,
+      String? newJobType,
+      bool clear = false}) {
     category = clear ? null : newCategory;
     location = clear ? null : newLocation;
     jobType = clear ? null : newJobType;
@@ -59,7 +67,11 @@ class JobsViewModel extends ChangeNotifier {
   }
 
   List<String> _unique(Iterable<String> values) {
-    final result = values.where((value) => value.trim().isNotEmpty).toSet().toList()..sort();
+    final result = values
+        .where((value) => value.trim().isNotEmpty)
+        .toSet()
+        .toList()
+      ..sort();
     return result;
   }
 }

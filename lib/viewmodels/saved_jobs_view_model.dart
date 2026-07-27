@@ -5,7 +5,7 @@ import '../models/job.dart';
 class SavedJobsViewModel extends ChangeNotifier {
   SavedJobsViewModel(this._repository) : _jobs = _repository.load();
   final SavedJobsRepository _repository;
-  List<SavedJob> _jobs;
+  final List<SavedJob> _jobs;
 
   List<SavedJob> get jobs => List.unmodifiable(_jobs);
   bool contains(int id) => _jobs.any((item) => item.job.id == id);
@@ -20,7 +20,8 @@ class SavedJobsViewModel extends ChangeNotifier {
     await _commit();
   }
 
-  Future<void> update(int id, {ApplicationStatus? status, String? notes}) async {
+  Future<void> update(int id,
+      {ApplicationStatus? status, String? notes}) async {
     final index = _jobs.indexWhere((item) => item.job.id == id);
     if (index < 0) return;
     _jobs[index] = _jobs[index].copyWith(status: status, notes: notes);

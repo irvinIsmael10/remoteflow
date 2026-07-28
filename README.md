@@ -33,8 +33,7 @@ lib/
 Requiere Flutter estable con Dart 3.3 o superior.
 
 ```bash
-# Genera únicamente los runners nativos que no se versionan en esta entrega.
-flutter create . --platforms=android,ios
+
 flutter pub get
 flutter run
 ```
